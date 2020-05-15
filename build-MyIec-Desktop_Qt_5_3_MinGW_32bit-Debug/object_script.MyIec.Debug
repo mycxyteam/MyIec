@@ -1,0 +1,16 @@
+INPUT(
+./debug/main.o
+./debug/myiec.o
+./debug/newcombobox.o
+./debug/communicationset.o
+./debug/serialset.o
+./debug/opendocument.o
+./debug/timeset.o
+./debug/processiec.o
+./debug/moc_myiec.o
+./debug/moc_newcombobox.o
+./debug/moc_communicationset.o
+./debug/moc_serialset.o
+./debug/moc_opendocument.o
+./debug/moc_timeset.o
+);

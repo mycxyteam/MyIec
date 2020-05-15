@@ -1,0 +1,16 @@
+INPUT(
+./release/main.o
+./release/myiec.o
+./release/newcombobox.o
+./release/communicationset.o
+./release/serialset.o
+./release/opendocument.o
+./release/timeset.o
+./release/processiec.o
+./release/moc_myiec.o
+./release/moc_newcombobox.o
+./release/moc_communicationset.o
+./release/moc_serialset.o
+./release/moc_opendocument.o
+./release/moc_timeset.o
+);
