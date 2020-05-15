@@ -18,6 +18,7 @@
 #include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
 #include <newcombobox.h>
 
 QT_BEGIN_NAMESPACE
@@ -34,6 +35,7 @@ public:
     QComboBox *comboBox_2;
     QComboBox *comboBox_3;
     QComboBox *comboBox_4;
+    QPushButton *pushButton;
 
     void setupUi(QDialog *SerialSet)
     {
@@ -77,6 +79,9 @@ public:
         comboBox_4 = new QComboBox(SerialSet);
         comboBox_4->setObjectName(QStringLiteral("comboBox_4"));
         comboBox_4->setGeometry(QRect(210, 170, 69, 22));
+        pushButton = new QPushButton(SerialSet);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setGeometry(QRect(290, 10, 75, 23));
 
         retranslateUi(SerialSet);
         QObject::connect(buttonBox, SIGNAL(accepted()), SerialSet, SLOT(accept()));
@@ -110,6 +115,7 @@ public:
          << QApplication::translate("SerialSet", "No", 0)
          << QApplication::translate("SerialSet", "Odd", 0)
         );
+        pushButton->setText(QApplication::translate("SerialSet", "\345\257\274\345\205\245\350\256\276\347\275\256", 0));
     } // retranslateUi
 
 };
