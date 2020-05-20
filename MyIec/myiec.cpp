@@ -4,6 +4,8 @@
 #include "QFileDialog"
 #include "QInputDialog"
 
+#define Red QColor(255,0,0,127)
+#define Green QColor(34, 139, 34, 127)
 
 MyIec::MyIec(QWidget *parent) :
     QMainWindow(parent),
@@ -42,6 +44,10 @@ MyIec::MyIec(QWidget *parent) :
     ui->lineEdit_2->installEventFilter(this);//控件注册近事件过滤器中
     ui->lineEdit_4->installEventFilter(this);
     inputLine->installEventFilter(this);
+//    ui->radioButton->installEventFilter(this);
+//    ui->radioButton_2->installEventFilter(this);
+
+//    ui->radioButton->setHidden(0);
 //    inputLine->setFocusPolicy(Qt::StrongFocus);
 //    ui->lineEdit_2->setFocusPolicy(Qt::StrongFocus);
 
@@ -100,16 +106,16 @@ int MyIec::processReceiveInfo(QByteArray Allinfo)
                 recinfo[recinfolen++] = Allinfo[i];
             }
         }
-        plainText(ui->textBrowser_3,recinfo,QColor(0,255,0,127));
-        plainText(ui->textBrowser_3,"\n",QColor(0,255,0,127));
+        plainText(ui->textBrowser_3,recinfo,Green);
+        plainText(ui->textBrowser_3,"\n",Green);
     }else{
         for(int i = 0;i<Allinfo.count();i++){
             if(Allinfo[i] == 0x06){
                 QByteArray re_data;
                 re_data[0] = 0x4F;
                 re_data[1] = 0x4B;
-                plainText(ui->textBrowser_3,re_data,QColor(0,255,0,127));
-                plainText(ui->textBrowser_3,"\n",QColor(0,255,0,127));
+                plainText(ui->textBrowser_3,re_data,Green);
+                plainText(ui->textBrowser_3,"\n",Green);
                 break;
             }
         }
@@ -196,13 +202,13 @@ void MyIec::mReceiveIecInfo()
         }
     }
     //接受数据显示
-    plainText(ui->textBrowser,current_date,QColor(0,255,0,127));
-    plainText(ui->textBrowser," ==> ",QColor(0,255,0,127));
-    plainText(ui->textBrowser_2,current_date,QColor(0,255,0,127));
-    plainText(ui->textBrowser_2," ==> ",QColor(0,255,0,127));
+    plainText(ui->textBrowser,current_date,Green);
+    plainText(ui->textBrowser," ==> ",Green);
+    plainText(ui->textBrowser_2,current_date,Green);
+    plainText(ui->textBrowser_2," ==> ",Green);
 
-    plainText(ui->textBrowser,tempArray,QColor(0,255,0,127));
-    plainText(ui->textBrowser,"\n",QColor(0,255,0,127));
+    plainText(ui->textBrowser,tempArray,Green);
+    plainText(ui->textBrowser,"\n",Green);
     //为了hex显示效果做空格处理
     QByteArray p = Allinfo.toHex().toUpper();
     QByteArray p1;
@@ -212,8 +218,8 @@ void MyIec::mReceiveIecInfo()
         p1[j++] = p[i++];
         p1[j++] = 0x7F;
     }
-    plainText(ui->textBrowser_2,p1,QColor(0,255,0,127));
-    plainText(ui->textBrowser_2,"\n",QColor(0,255,0,127));
+    plainText(ui->textBrowser_2,p1,Green);
+    plainText(ui->textBrowser_2,"\n",Green);
 
     QString dateName =current_date_time.toString("yyyy.MM.dd");
     //打开文件操作   /////////////////////////////////////////////////////////////////////////
@@ -344,9 +350,9 @@ void MyIec::mReceiveIecInfo()
             }
             if(Allinfo[i] == 0x15){
                 if(ComStageName == "IEC_COMM_COMMAND_P"){
-                    plainText(ui->textBrowser_3,"密码认证错误\n",QColor(255,0,0,127));
+                    plainText(ui->textBrowser_3,"密码认证错误\n",Red);
                 }else if(ComStageName == "IEC_COMM_COMMAND"){
-                    plainText(ui->textBrowser_3,"输入数据或ID错误\n",QColor(255,0,0,127));
+                    plainText(ui->textBrowser_3,"输入数据或ID错误\n",Red);
                 }
 
                 timeFlag &= ~timeOut;
@@ -372,13 +378,13 @@ void MyIec::mReceiveIecInfo()
         }
     }
     //显示
-    plainText(ui->textBrowser,current_date,QColor(255,0,0,127));
-    plainText(ui->textBrowser," <== ",QColor(255,0,0,127));
-    plainText(ui->textBrowser,tempArray,QColor(255,0,0,127));
-    plainText(ui->textBrowser,"\n",QColor(255,0,0,127));
+    plainText(ui->textBrowser,current_date,Red);
+    plainText(ui->textBrowser," <== ",Red);
+    plainText(ui->textBrowser,tempArray,Red);
+    plainText(ui->textBrowser,"\n",Red);
 
-    plainText(ui->textBrowser_2,current_date,QColor(255,0,0,127));
-    plainText(ui->textBrowser_2," <== ",QColor(255,0,0,127));
+    plainText(ui->textBrowser_2,current_date,Red);
+    plainText(ui->textBrowser_2," <== ",Red);
     //为了hex显示效果做空格处理
     p.clear();
     p1.clear();
@@ -389,8 +395,8 @@ void MyIec::mReceiveIecInfo()
         p1[j++] = p[i++];
         p1[j++] = 0x7F;
     }
-    plainText(ui->textBrowser_2,p1,QColor(255,0,0,127));
-    plainText(ui->textBrowser_2,"\n",QColor(255,0,0,127));
+    plainText(ui->textBrowser_2,p1,Red);
+    plainText(ui->textBrowser_2,"\n",Red);
 
     QString dateName_1 =current_date_time.toString("yyyy.MM.dd");
     //打开文件操作   /////////////////////////////////////////////////////////////////////////
@@ -446,7 +452,7 @@ void MyIec::plainText(QTextBrowser *myTextBrowser,QString str,const QColor & c)
     myTextBrowser->insertPlainText(str);
 //    ui->textBrowser->setTextColor(c);
 //    ui->textBrowser->insertPlainText(str);
-//    ui->textBrowser->setTextColor(QColor(0, 255, 0, 127));//
+//    ui->textBrowser->setTextColor(Green));//
 //    ui->textBrowser->insertPlainText("wwww\n");
 }
 
@@ -504,18 +510,32 @@ bool MyIec::eventFilter(QObject *o, QEvent *e)
         }
     }else if((e->type()==QEvent::MouseButtonPress)&&((o == ui->lineEdit)||(o == ui->lineEdit_4))){
 //        qDebug()<<"111";
-        return QWidget::event(e);
+        inputLine->hide();
+        return false;
     }else if((e->type()==QEvent::KeyPress)&&(o == inputLine)){
 //        qDebug()<<e->type();
         QKeyEvent *key_e = static_cast<QKeyEvent *>(e);
-        if(key_e->key()==Qt::Key_Enter||key_e->key()==Qt::Key_Return)
+        qDebug()<<key_e->key() << Qt::Key_Enter << Qt::Key_Return << Qt::Key_Space;
+        if(key_e->key()==Qt::Key_Enter||key_e->key()==Qt::Key_Return||key_e->key()==Qt::Key_Space)
         {
             return QWidget::event(e);
         }else{
             return false;
         }
-    }
-    else
+    }else if((e->type()==QEvent::KeyPress)&&((o == ui->lineEdit)||(o == ui->lineEdit_2)||(o == ui->lineEdit_4))){
+    //        qDebug()<<e->type();
+        QKeyEvent *key_e = static_cast<QKeyEvent *>(e);
+        qDebug()<<key_e->key() << Qt::Key_Enter << Qt::Key_Return << Qt::Key_Space;
+        if(key_e->key()==Qt::Key_Enter||key_e->key()==Qt::Key_Return||key_e->key()==Qt::Key_Space)
+        {
+            return QWidget::event(e);
+        }else{
+            return false;
+        }
+    }else if(o == ui->radioButton || o == ui->radioButton_2){
+        qDebug()<<e->type();
+        return true;
+    }else
         return false;
 }
 
@@ -548,7 +568,7 @@ void MyIec::my_100ms_timer_timeout()
             ui->progressBar->setMaximum(0);
             ui->progressBar->setMinimum(1);
 
-            plainText(ui->textBrowser_3,"No Response\n",QColor(255,0,0,127));
+            plainText(ui->textBrowser_3,"No Response\n",Red);
         }else{
             timeOutTime -= 100;
         }
@@ -829,13 +849,13 @@ void MyIec::startSerialCom(int ReadOrWrite)
     QDateTime current_date_time =QDateTime::currentDateTime();
     QString current_date =current_date_time.toString("yyyy.MM.dd hh:mm:ss.zzz");
 //显示
-    plainText(ui->textBrowser,current_date,QColor(255,0,0,127));
-    plainText(ui->textBrowser," <== ",QColor(255,0,0,127));
-    plainText(ui->textBrowser,tempArray,QColor(255,0,0,127));
-    plainText(ui->textBrowser,"\n",QColor(255,0,0,127));
+    plainText(ui->textBrowser,current_date,Red);
+    plainText(ui->textBrowser," <== ",Red);
+    plainText(ui->textBrowser,tempArray,Red);
+    plainText(ui->textBrowser,"\n",Red);
 
-    plainText(ui->textBrowser_2,current_date,QColor(255,0,0,127));
-    plainText(ui->textBrowser_2," <== ",QColor(255,0,0,127));
+    plainText(ui->textBrowser_2,current_date,Red);
+    plainText(ui->textBrowser_2," <== ",Red);
 
     //为了hex显示效果做空格处理
     QByteArray p = TxQbyteArry.toHex().toUpper();
@@ -846,8 +866,8 @@ void MyIec::startSerialCom(int ReadOrWrite)
         p1[j++] = p[i++];
         p1[j++] = 0x7F;
     }
-    plainText(ui->textBrowser_2,p1,QColor(255,0,0,127));
-    plainText(ui->textBrowser_2,"\n",QColor(255,0,0,127));
+    plainText(ui->textBrowser_2,p1,Red);
+    plainText(ui->textBrowser_2,"\n",Red);
 
     QString dateName =current_date_time.toString("yyyy.MM.dd");
     //打开文件操作   /////////////////////////////////////////////////////////////////////////
@@ -960,4 +980,8 @@ void MyIec::on_pushButton_3_clicked()
         ui->progressBar->setMaximum(0);
         ui->progressBar->setMinimum(1);
     }
+}
+
+void MyIec::on_radioButton_clicked()
+{
 }

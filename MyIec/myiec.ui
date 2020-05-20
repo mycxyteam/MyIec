@@ -107,6 +107,12 @@
       <property name="text">
        <string>读操作带数据</string>
       </property>
+      <property name="checked">
+       <bool>false</bool>
+      </property>
+      <property name="autoExclusive">
+       <bool>false</bool>
+      </property>
      </widget>
     </item>
     <item row="8" column="1">

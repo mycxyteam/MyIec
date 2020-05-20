@@ -93,6 +93,8 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+    void on_radioButton_clicked();
+
 signals:
 
 private:
