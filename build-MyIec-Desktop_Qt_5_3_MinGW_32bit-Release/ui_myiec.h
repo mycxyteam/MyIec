@@ -42,6 +42,7 @@ public:
     QAction *actionB;
     QAction *actionQ;
     QAction *actionC;
+    QAction *actionRF;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QLabel *label_5;
@@ -81,6 +82,7 @@ public:
     QMenuBar *menuBar;
     QMenu *menu;
     QMenu *menu_2;
+    QMenu *menu_RF;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -97,6 +99,8 @@ public:
         actionQ->setObjectName(QStringLiteral("actionQ"));
         actionC = new QAction(MyIec);
         actionC->setObjectName(QStringLiteral("actionC"));
+        actionRF = new QAction(MyIec);
+        actionRF->setObjectName(QStringLiteral("actionRF"));
         centralWidget = new QWidget(MyIec);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -149,6 +153,8 @@ public:
 
         radioButton = new QRadioButton(centralWidget);
         radioButton->setObjectName(QStringLiteral("radioButton"));
+        radioButton->setChecked(false);
+        radioButton->setAutoExclusive(false);
 
         gridLayout->addWidget(radioButton, 5, 5, 1, 1);
 
@@ -326,6 +332,8 @@ public:
         menu->setObjectName(QStringLiteral("menu"));
         menu_2 = new QMenu(menuBar);
         menu_2->setObjectName(QStringLiteral("menu_2"));
+        menu_RF = new QMenu(menuBar);
+        menu_RF->setObjectName(QStringLiteral("menu_RF"));
         MyIec->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MyIec);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -336,10 +344,12 @@ public:
 
         menuBar->addAction(menu->menuAction());
         menuBar->addAction(menu_2->menuAction());
+        menuBar->addAction(menu_RF->menuAction());
         menu->addAction(actionA);
         menu->addAction(actionB);
         menu->addAction(actionC);
         menu_2->addAction(actionQ);
+        menu_RF->addAction(actionRF);
 
         retranslateUi(MyIec);
 
@@ -360,6 +370,11 @@ public:
         actionQ->setToolTip(QApplication::translate("MyIec", "\346\211\223\345\274\200.txt", 0));
 #endif // QT_NO_TOOLTIP
         actionC->setText(QApplication::translate("MyIec", "\346\227\266\351\227\264\345\217\202\346\225\260", 0));
+        actionRF->setText(QApplication::translate("MyIec", "\346\211\223\345\274\200\350\256\276\347\275\256\350\275\257\344\273\266", 0));
+        actionRF->setIconText(QApplication::translate("MyIec", "RF", 0));
+#ifndef QT_NO_TOOLTIP
+        actionRF->setToolTip(QApplication::translate("MyIec", "RF", 0));
+#endif // QT_NO_TOOLTIP
         label_5->setText(QApplication::translate("MyIec", "\345\257\206\347\240\201\357\274\232", 0));
         pushButton_clear->setText(QApplication::translate("MyIec", "\346\270\205\347\251\272\346\225\260\346\215\256", 0));
         label_3->setText(QApplication::translate("MyIec", "\350\241\250\345\217\267\357\274\232", 0));
@@ -387,9 +402,11 @@ public:
         label_6->setText(QApplication::translate("MyIec", "\345\276\252\347\216\257\346\212\204\350\257\273\357\274\232", 0));
         pushButton_3->setText(QApplication::translate("MyIec", "\346\211\247\350\241\214", 0));
         label_8->setText(QApplication::translate("MyIec", "\346\225\260\346\215\256ID\357\274\232", 0));
+        lineEdit_4->setText(QString());
         radioButton_2->setText(QApplication::translate("MyIec", "RF", 0));
         menu->setTitle(QApplication::translate("MyIec", "\350\256\276\347\275\256", 0));
         menu_2->setTitle(QApplication::translate("MyIec", "\346\227\245\345\277\227", 0));
+        menu_RF->setTitle(QApplication::translate("MyIec", "\350\256\276\347\275\256RF\345\267\245\350\243\205", 0));
     } // retranslateUi
 
 };

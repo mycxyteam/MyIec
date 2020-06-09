@@ -3,6 +3,7 @@
 
 #include "QFileDialog"
 #include "QInputDialog"
+#include <QProcess>
 
 #define Red QColor(255,0,0,127)
 #define Green QColor(34, 139, 34, 127)
@@ -487,6 +488,25 @@ void MyIec::keyPressEvent(QKeyEvent *e)
 bool MyIec::eventFilter(QObject *o, QEvent *e)
 {
     //控件点击事件
+    if((o == ui->lineEdit_4)&&(e->type() == QEvent::KeyPress))
+    {
+        QKeyEvent *key_e = static_cast<QKeyEvent *>(e);
+        if(key_e->key() == Qt::Key_Enter ||\
+                key_e->key() == Qt::Key_Return ||\
+                key_e->key() == Qt::Key_Space)
+        {
+            if(ui->lineEdit_4->text() == "040F0F0C" || ui->lineEdit_4->text() == "96.50.82.12")
+            {
+                rr = ui->lineEdit_2->text();
+                dialog_3 = new Dialog(this);
+                dialog_3->setModal(false);
+                connect(dialog_3,SIGNAL(sendData_3(QString)),this,SLOT(receiverData_3(QString)));
+                dialog_3->show();
+                qDebug() << "111";
+            }
+            return QWidget::event(e);
+        }
+    }
     if((e->type()==QEvent::MouseButtonPress)&&(o == ui->lineEdit_2))
     {
         if(inputLine->isHidden()){
@@ -502,7 +522,7 @@ bool MyIec::eventFilter(QObject *o, QEvent *e)
             inputLine->move(panelpos);
             inputLine->show();
 
-            inputLine->setFocus();
+//            inputLine->setFocus();
             return true;
         }else{
             ui->lineEdit_2->setFocus();
@@ -668,6 +688,11 @@ void MyIec::receiverData_2(TimeVar data)
     myTimeVar.timeOutDelay = data.timeOutDelay;
     myTimeVar.changeBaudDelay = data.changeBaudDelay;
 
+}
+
+void MyIec::receiverData_3(QString data)
+{
+    ui->lineEdit_2->setText(data);
 }
 
 
@@ -984,4 +1009,10 @@ void MyIec::on_pushButton_3_clicked()
 
 void MyIec::on_radioButton_clicked()
 {
+}
+
+void MyIec::on_actionRF_triggered()
+{
+    QProcess pro;
+    pro.startDetached("setRf/SetRf.exe");
 }

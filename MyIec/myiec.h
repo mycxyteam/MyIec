@@ -9,6 +9,7 @@
 #include <QtSerialPort/QSerialPortInfo>
 #include "opendocument.h"
 #include "timeset.h"
+#include "dialog.h"
 #include <QTextBrowser>
 #include <mutex>
 #include "processiec.h"
@@ -33,6 +34,7 @@ public:
 
     SerialVar SerialInit_var;
     CommunicationVar ComInit_Var;
+    QString rr;
 
     void InitDisplay();
     void InitRamData();
@@ -69,6 +71,7 @@ private slots:
     void receiverData(SerialVar data);
     void receiverData_1(CommunicationVar data);
     void receiverData_2(TimeVar data);
+    void receiverData_3(QString data);
     void GetSerialPortName(void);
     void on_pushButton_OpenOrCloseSerial_clicked();
 
@@ -95,6 +98,8 @@ private slots:
 
     void on_radioButton_clicked();
 
+    void on_actionRF_triggered();
+
 signals:
 
 private:
@@ -102,6 +107,7 @@ private:
     SerialSet *dialog;
     CommunicationSet *dialog_1;
     TimeSet *dialog_2;
+    Dialog *dialog_3;
     QSerialPort *myserial;
 
     QTimer *fTimer;//定义定时器
