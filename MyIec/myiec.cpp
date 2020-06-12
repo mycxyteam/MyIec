@@ -183,6 +183,7 @@ void MyIec::mReceiveIecInfo()
 
     Allinfo.append(info);
 
+    timeOutTime = myTimeVar.timeOutDelay;
 
     if(IsAllinfo == 0 || Fg_info == 0)//是否接受完整
     {
