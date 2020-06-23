@@ -45,6 +45,8 @@ MyIec::MyIec(QWidget *parent) :
     ui->lineEdit_2->installEventFilter(this);//控件注册近事件过滤器中
     ui->lineEdit_4->installEventFilter(this);
     inputLine->installEventFilter(this);
+
+    ui->textBrowser_2->installEventFilter(this);
 //    ui->radioButton->installEventFilter(this);
 //    ui->radioButton_2->installEventFilter(this);
 
@@ -488,6 +490,15 @@ void MyIec::keyPressEvent(QKeyEvent *e)
 
 bool MyIec::eventFilter(QObject *o, QEvent *e)
 {
+//    qDebug()<<QEvent::InputMethodQuery << e->type();
+    if((o == ui->textBrowser_2) && (e->type() == QEvent::Enter))
+    {
+ //       qDebug()<< ui->textBrowser_2->isReadOnly();
+        if(ui->tabWidget->currentIndex() == 1){
+//            qDebug() << "++++" << e->type();
+            ui->textBrowser_2->setFocus();
+        }
+    }
     //控件点击事件
     if((o == ui->lineEdit_4)&&(e->type() == QEvent::KeyPress))
     {

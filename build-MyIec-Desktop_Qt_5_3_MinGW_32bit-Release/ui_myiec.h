@@ -234,6 +234,7 @@ public:
         textBrowser_2->setContextMenuPolicy(Qt::DefaultContextMenu);
         textBrowser_2->setLayoutDirection(Qt::LeftToRight);
         textBrowser_2->setSizeAdjustPolicy(QAbstractScrollArea::AdjustIgnored);
+        textBrowser_2->setReadOnly(true);
 
         horizontalLayout_2->addWidget(textBrowser_2);
 
